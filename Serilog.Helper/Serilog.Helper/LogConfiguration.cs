@@ -42,24 +42,24 @@ namespace Serilog.Helper
                 //.Enrich.WithProperty("LogType", nameof(LocationType))
                 //.Enrich.WithProperty("LogType", nameof(OptionType))
                 //.Enrich.WithProperty("LogType", nameof(ILogType))
-                .WriteTo.Map("LogType", nameof(SystemType), (logType, writeTo) =>
-                    writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
+                .WriteTo.Map("LogType", nameof(ILogType), (logType, writeTo) =>
+                    writeTo.File(@$"C:\Logs\Experiment\{logType}.log",
                         rollingInterval: RollingInterval.Day,
                         rollOnFileSizeLimit: true,
                         outputTemplate:
                         "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [Thread:({ThreadId:D3})] Message: {Message}{NewLine}{Exception}"))
-                .WriteTo.Map("LogType", nameof(LocationType), (logType, writeTo) =>
-                    writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
-                        rollingInterval: RollingInterval.Day,
-                        rollOnFileSizeLimit: true,
-                        outputTemplate:
-                        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [Thread:({ThreadId:D3})] Message: {Message}{NewLine}{Exception}"))
-                .WriteTo.Map("LogType", nameof(OptionType), (logType, writeTo) =>
-                    writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
-                        rollingInterval: RollingInterval.Day,
-                        rollOnFileSizeLimit: true,
-                        outputTemplate:
-                        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [Thread:({ThreadId:D3})] Message: {Message}{NewLine}{Exception}"))
+                //.WriteTo.Map("LogType", nameof(LocationType), (logType, writeTo) =>
+                //    writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
+                //        rollingInterval: RollingInterval.Day,
+                //        rollOnFileSizeLimit: true,
+                //        outputTemplate:
+                //        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [Thread:({ThreadId:D3})] Message: {Message}{NewLine}{Exception}"))
+                //.WriteTo.Map("LogType", nameof(OptionType), (logType, writeTo) =>
+                //    writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
+                //        rollingInterval: RollingInterval.Day,
+                //        rollOnFileSizeLimit: true,
+                //        outputTemplate:
+                //        "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [Thread:({ThreadId:D3})] Message: {Message}{NewLine}{Exception}"))
                 //.WriteTo.Map("LogType", "LocationType", (_, writeTo) =>
                 //    writeTo.File(@"C:\Logs\Experiment\LocationTypeLog.log",
                 //        rollingInterval: RollingInterval.Day,

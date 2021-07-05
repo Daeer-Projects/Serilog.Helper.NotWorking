@@ -37,5 +37,35 @@ namespace Serilog.Helper.LogTypes
             logger.ForContext("LogType", nameof(T));
             return logger;
         }
+
+        public static void Verbose<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Verbose($"{{LogType}}-{message}", typeof(T).Name);
+        }
+
+        public static void Debug<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Debug($"{{LogType}}-{message}", typeof(T).Name);
+        }
+
+        public static void Information<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Information($"{{LogType}}-{message}", typeof(T).Name);
+        }
+
+        public static void Warning<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Warning($"{{LogType}}-{message}", typeof(T).Name);
+        }
+
+        public static void Error<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Error($"{{LogType}}-{message}", typeof(T).Name);
+        }
+
+        public static void Fatal<T>(this ILogger logger, string message) where T : ILogType
+        {
+            logger.Fatal($"{{LogType}}-{message}", typeof(T).Name);
+        }
     }
 }

@@ -10,7 +10,7 @@ I would like the configuration (either code or appsettings) to be something like
 
 ```csharp
     .WriteTo.Map("LogType", nameof(ILogType), (logType, writeTo) =>
-        writeTo.File(@$"C:\Logs\Experiment\{logType}Log.log",
+        writeTo.File(@$"C:\Logs\Experiment\{logType}.log",
             rollingInterval: RollingInterval.Day,
             rollOnFileSizeLimit: true,
             outputTemplate:
@@ -46,6 +46,32 @@ This is what I didn't want to do.
 ```
 
 The reason I didn't want to use this, is because the name of the type is the file name, why do I need it in the log message as well.
+
+### However, it works
+
+I have created several extensions which copy the normal Serilog methods.
+
+* Verbose
+* Debug
+* Information
+* Warning
+* Error
+* Fatal
+
+The extensions look like this (I'm showing the `Information()` version here):
+
+```csharp
+    public static void Information<T>(this ILogger logger, string message) where T : ILogType
+    {
+        logger.Information($"{{LogType}}-{message}", typeof(T).Name);
+    }
+```
+
+The call to this extension looks like this:
+
+```csharp
+    _logger.Information<SystemType>(message);
+```
 
 ## I also tried this
 
